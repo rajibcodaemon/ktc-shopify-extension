@@ -1,0 +1,10 @@
+FROM nginx
+MAINTAINER Brian Czapiga <bczapiga@beenverified.com>
+
+WORKDIR /app
+
+COPY ./drone/default.conf /etc/nginx/conf.d/default.conf
+COPY ./drone/cloudflare.conf /etc/nginx/conf.d/cloudflare.conf
+COPY ./drone/kubernetes.conf /etc/nginx/conf.d/kubernetes.conf
+
+COPY . /app
