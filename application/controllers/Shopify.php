@@ -81,9 +81,9 @@ class Shopify extends CI_Controller {
         unset($_SESSION['shop']);
         unset($_SESSION['oid']);
         $shop = $this->input->get('shop');
-        $scope = $this->input->get('scope');
-        $api_key = $this->input->get('api');
-        $secret = $this->input->get('secret');
+        $scope = $this->input->get('scope') || 'read_content, write_content,read_customers, write_customers,read_orders, write_orders';
+        $api_key = $this->input->get('api') || 'a99d2f438efff7ea407fdba3a0b09410';
+        $secret = $this->input->get('secret') || '78e61c4dd51808ed07e04de1e8331aba';
 
         if (isset($_GET['id']) && !empty($_GET['id'])){
 
@@ -95,7 +95,7 @@ class Shopify extends CI_Controller {
 
         // Now, request the token and store it in your session.
         // Url to redirect and get the app authorise key/access token
-        $auth_url = 'https://shopify.knowthycustomer.com/index.php/shopify/get_shopify_orders?api_key='.$api_key.'&secret='.$secret;
+        $auth_url = 'https://ktc-shopify-extension.herokuapp.com/index.php/shopify/get_shopify_orders?api_key='.$api_key.'&secret='.$secret;
 
         ///// redirect to authorize url /////        
         redirect($shopifyClient->getAuthorizeUrl($scope, $auth_url, ' '), 'location');
